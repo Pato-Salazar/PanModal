@@ -177,6 +177,11 @@ open class PanModalPresentationController: UIPresentationController {
         guard let containerView = containerView
             else { return }
 
+        // Fix bug issue for iOS 17.1
+        if self.panContainerView.frame == .zero {
+            self.adjustPresentedViewFrame()
+        }
+
         layoutBackgroundView(in: containerView)
         layoutPresentedView(in: containerView)
         configureScrollViewInsets()
